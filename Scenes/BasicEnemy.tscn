@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn76wxxbnk6ec"]
+
+[ext_resource type="Script" path="res://Scripts/BasicEnemy.cs" id="1_8c12d"]
+[ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="1_8pheq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aj4ox"]
+size = Vector2(64, 62)
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_8c12d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.484375, 0.484375)
+texture = ExtResource("1_8pheq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aj4ox")

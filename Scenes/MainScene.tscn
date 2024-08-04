@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=6 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/TestScript.cs" id="1_7djwv"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_6bhuw"]
+[ext_resource type="PackedScene" uid="uid://dn76wxxbnk6ec" path="res://Scenes/BasicEnemy.tscn" id="4_igbv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd3wx"]
 size = Vector2(126, 128)
@@ -10,15 +11,14 @@ size = Vector2(126, 128)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7djwv")
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1154.0
-offset_bottom = 652.0
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_4vjy7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_rd3wx")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_6bhuw")
+
+[node name="BasicEnemy" parent="." instance=ExtResource("4_igbv2")]
+position = Vector2(1010, 325)
