@@ -1,19 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn76wxxbnk6ec"]
+[gd_scene load_steps=7 format=3 uid="uid://dn76wxxbnk6ec"]
 
 [ext_resource type="Script" path="res://Scripts/BasicEnemy.cs" id="1_oy4sd"]
-[ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="2_6x6c5"]
+[ext_resource type="Texture2D" uid="uid://ctkryoovwrpup" path="res://Sprites/Enemies/Basic Enemy/neutral.png" id="2_xl04q"]
+[ext_resource type="Texture2D" uid="uid://cocxa4mex5v35" path="res://Sprites/Enemies/Basic Enemy/step left.png" id="3_ljh34"]
+[ext_resource type="Texture2D" uid="uid://b2xts67x1k7i1" path="res://Sprites/Enemies/Basic Enemy/step right.png" id="4_x16yo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aj4ox"]
-size = Vector2(64, 62)
+[sub_resource type="SpriteFrames" id="SpriteFrames_eahlv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xl04q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ljh34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xl04q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x16yo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c141r"]
+radius = 17.0
+height = 58.0
 
 [node name="BasicEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oy4sd")
+hitFlashColor = Color(0.843137, 0, 0, 1)
+maxHealth = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.484375, 0.484375)
-texture = ExtResource("2_6x6c5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.146199, 0.146199)
+sprite_frames = SubResource("SpriteFrames_eahlv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_aj4ox")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_c141r")

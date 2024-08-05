@@ -61,3 +61,7 @@ click={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Enemy Projectiles"
 2d_physics/layer_4="Player Projectiles"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.411689, 0.352322, 0.1252, 1)

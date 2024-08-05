@@ -16,7 +16,7 @@ public partial class Player : DamageableEntity
     {
         maxHealth = 5;
         base._Ready();
-        this.Death += DeathMessage;
+        OnDeath += DeathMessage;
 
         chompPrefab = GD.Load<PackedScene>("res://Scenes/Chomp.tscn");
     }

@@ -10,6 +10,10 @@ public partial class BasicEnemy : DamageableEntity
 	private float speed = 200;
 
 	Timer attackTimer;
+	// Timer for how long enemies should turn red when hit
+	Timer hitFlashTImer;
+
+	[Export] private Color hitFlashColor;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -17,7 +21,7 @@ public partial class BasicEnemy : DamageableEntity
 		// Find the player in the scene
 		player = GetParent().GetParent().GetNode<Player>("Player");
 		// Load the sword slash prefab
-		swordSlashPrefab = GD.Load<PackedScene>("res://Scenes/SwordSlash.tscn");
+		swordSlashPrefab = GD.Load<PackedScene>("res://Scenes/AreaSwordSlash.tscn");
 		// Create a timer to automatically attack
         attackTimer = new Timer
         {
@@ -32,12 +36,26 @@ public partial class BasicEnemy : DamageableEntity
 		maxHealth = 3;
 		base._Ready();
 		// Delete this object when it dies
-		Death += () => QueueFree();
+		OnDeath += () => QueueFree();
+
+		// Start the walking animation
+		AnimatedSprite2D animation = (AnimatedSprite2D) GetChild(0);
+		animation.Play();
+
+		// Set up hitflash timer
+		hitFlashTImer = new Timer {
+			OneShot = true,
+			Autostart = false,
+			WaitTime = 0.5
+		};
+		AddChild(hitFlashTImer);
+		hitFlashTImer.Timeout += hitFlashOff;
+
+		OnDamage += hitFlashOn;
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-        LookAt(player.Position);
 		Vector2 directionToPlayer = player.Position - this.Position;
 		Velocity = directionToPlayer.Normalized() * speed;
 		MoveAndSlide();
@@ -45,10 +63,20 @@ public partial class BasicEnemy : DamageableEntity
 
 	public void fire() {
 		if ((player.Position - this.Position).Length() < 150) {
-			BasicProjectile swordSlash = (BasicProjectile) swordSlashPrefab.Instantiate();
-			GetParent().AddChild(swordSlash);
-			swordSlash.Position = this.Position;
-			swordSlash.Rotation = this.Rotation;
+			AreaSwordSlash swordSlash = (AreaSwordSlash) swordSlashPrefab.Instantiate();
+			Vector2 directionToPlayer = (player.Position - this.Position).Normalized();
+			swordSlash.Position = directionToPlayer * 15;
+			swordSlash.Rotation = directionToPlayer.Angle();
+			AddChild(swordSlash);
 		}
+	}
+
+	public void hitFlashOn() {
+		Modulate = hitFlashColor;
+		hitFlashTImer.Start();
+	}
+
+	public void hitFlashOff() {
+		Modulate = new Color(1,1,1);
 	}
 }

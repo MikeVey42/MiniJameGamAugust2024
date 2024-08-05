@@ -10,7 +10,9 @@ public partial class DamageableEntity : CharacterBody2D
     protected int health;
     // Signal that is released when this object dies
     [Signal]
-    public delegate void DeathEventHandler();
+    public delegate void OnDeathEventHandler();
+    [Signal]
+    public delegate void OnDamageEventHandler();
 
     public override void _Ready()
     {
@@ -21,8 +23,10 @@ public partial class DamageableEntity : CharacterBody2D
     public void Damage(int amount) {
         health -= amount;
         // Broadcast that this entity has died
-        if (health < 0) {
-            EmitSignal(SignalName.Death);
+        if (health <= 0) {
+            EmitSignal(SignalName.OnDeath);
+        }else {
+            EmitSignal(SignalName.OnDamage);
         }
     }
 

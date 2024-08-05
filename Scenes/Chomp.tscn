@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://btriode1l2b1a" path="res://Sprites/ChompAnimation/chomp3.png" id="4_jae5r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh4wv"]
-size = Vector2(84, 29)
+size = Vector2(94, 41)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_erdfg"]
 animations = [{
@@ -42,5 +42,5 @@ shape = SubResource("RectangleShape2D_dh4wv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, -1)
 rotation = 1.5708
-scale = Vector2(0.0968256, 0.176223)
+scale = Vector2(0.18856, 0.207056)
 sprite_frames = SubResource("SpriteFrames_erdfg")
