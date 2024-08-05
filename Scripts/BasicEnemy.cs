@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class BasicEnemy : CharacterBody2D
+public partial class BasicEnemy : DamageableEntity
 {
 	Player player;
 	PackedScene swordSlashPrefab;
@@ -18,9 +18,21 @@ public partial class BasicEnemy : CharacterBody2D
 		player = GetParent().GetNode<Player>("Player");
 		// Load the sword slash prefab
 		swordSlashPrefab = GD.Load<PackedScene>("res://Scenes/SwordSlash.tscn");
-		attackTimer = new Timer();
-		attackTimer.Start(1);
+		// Create a timer to automatically attack
+        attackTimer = new Timer
+        {
+            OneShot = false,
+            Autostart = true,
+			WaitTime = 1
+        };
+        AddChild(attackTimer);
 		attackTimer.Timeout += fire;
+
+		// Set the max health
+		maxHealth = 3;
+		base._Ready();
+		// Delete this object when it dies
+		Death += () => QueueFree();
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -33,8 +45,7 @@ public partial class BasicEnemy : CharacterBody2D
 
 	public void fire() {
 		if ((player.Position - this.Position).Length() < 150) {
-			SwordSlash swordSlash = (SwordSlash) swordSlashPrefab.Instantiate();
-			Debug.Print("fired!");
+			BasicProjectile swordSlash = (BasicProjectile) swordSlashPrefab.Instantiate();
 			GetParent().AddChild(swordSlash);
 			swordSlash.Position = this.Position;
 			swordSlash.Rotation = this.Rotation;

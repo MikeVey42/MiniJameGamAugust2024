@@ -2,15 +2,16 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class Player : CharacterBody2D
+public partial class Player : DamageableEntity
 {
 
     int speed = 400;  // move speed in pixels/sec
-    private int health;
 
     public override void _Ready()
     {
-        health = 20;
+        maxHealth = 5;
+        base._Ready();
+        this.Death += DeathMessage;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -22,8 +23,7 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
     }
 
-    public void Damage(int amount) {
-        health -= amount;
-        Debug.Print("New health is: " + health);
+    public void DeathMessage() {
+        Debug.Print("You have died");
     }
 }
