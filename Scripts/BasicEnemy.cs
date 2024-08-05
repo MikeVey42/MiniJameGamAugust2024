@@ -15,7 +15,7 @@ public partial class BasicEnemy : DamageableEntity
 	public override void _Ready()
 	{
 		// Find the player in the scene
-		player = GetParent().GetNode<Player>("Player");
+		player = GetParent().GetParent().GetNode<Player>("Player");
 		// Load the sword slash prefab
 		swordSlashPrefab = GD.Load<PackedScene>("res://Scenes/SwordSlash.tscn");
 		// Create a timer to automatically attack

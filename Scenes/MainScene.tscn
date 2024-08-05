@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/TestScript.cs" id="1_7djwv"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://d3qg1huqeb2as" path="res://Sprites/turt.png" id="3_g4lm4"]
-[ext_resource type="PackedScene" uid="uid://dn76wxxbnk6ec" path="res://Scenes/BasicEnemy.tscn" id="4_igbv2"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
+[ext_resource type="Script" path="res://Scripts/EnemyManager.cs" id="5_rbpb7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkgq4"]
 radius = 54.0
@@ -17,6 +17,7 @@ script = ExtResource("1_7djwv")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_4vjy7")
+turnSpeed = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 z_index = 1
@@ -36,14 +37,5 @@ shape = SubResource("CircleShape2D_xxfbq")
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_l373k")
 
-[node name="BasicEnemy" parent="." instance=ExtResource("4_igbv2")]
-position = Vector2(1010, 325)
-
-[node name="BasicEnemy2" parent="." instance=ExtResource("4_igbv2")]
-position = Vector2(991, 139)
-
-[node name="BasicEnemy3" parent="." instance=ExtResource("4_igbv2")]
-position = Vector2(384, 491)
-
-[node name="BasicEnemy4" parent="." instance=ExtResource("4_igbv2")]
-position = Vector2(826, 435)
+[node name="Enemy Manager" type="Node2D" parent="."]
+script = ExtResource("5_rbpb7")
