@@ -59,3 +59,11 @@ script = ExtResource("4_l373k")
 
 [node name="Enemy Manager" type="Node2D" parent="."]
 script = ExtResource("5_rbpb7")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+offset_left = 21.0
+offset_right = 25.0
+offset_bottom = 27.0
+value = 100.0

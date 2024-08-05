@@ -12,6 +12,8 @@ public partial class Player : DamageableEntity
 
     private PackedScene chompPrefab;
 
+    private ProgressBar healthBar;
+
     public override void _Ready()
     {
         maxHealth = 5;
@@ -19,6 +21,9 @@ public partial class Player : DamageableEntity
         OnDeath += DeathMessage;
 
         chompPrefab = GD.Load<PackedScene>("res://Scenes/Chomp.tscn");
+
+        healthBar = GetParent().GetNode("UI").GetNode<ProgressBar>("HealthBar");
+        OnDamage += () => healthBar.Value = (float) health * 100 / maxHealth;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -50,6 +55,6 @@ public partial class Player : DamageableEntity
     }
 
     public void DeathMessage() {
-        Debug.Print("You have died");
+        GetTree().ChangeSceneToFile("res://Scenes/DeathScreen.tscn");
     }
 }
