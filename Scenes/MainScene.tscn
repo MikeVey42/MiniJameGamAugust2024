@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=7 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/TestScript.cs" id="1_7djwv"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_6bhuw"]
 [ext_resource type="PackedScene" uid="uid://dn76wxxbnk6ec" path="res://Scenes/BasicEnemy.tscn" id="4_igbv2"]
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd3wx"]
 size = Vector2(126, 128)
@@ -20,5 +21,17 @@ shape = SubResource("RectangleShape2D_rd3wx")
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_6bhuw")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_l373k")
+
 [node name="BasicEnemy" parent="." instance=ExtResource("4_igbv2")]
 position = Vector2(1010, 325)
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("4_igbv2")]
+position = Vector2(991, 139)
+
+[node name="BasicEnemy3" parent="." instance=ExtResource("4_igbv2")]
+position = Vector2(384, 491)
+
+[node name="BasicEnemy4" parent="." instance=ExtResource("4_igbv2")]
+position = Vector2(826, 435)
