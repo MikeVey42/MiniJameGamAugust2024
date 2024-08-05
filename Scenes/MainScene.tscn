@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=8 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/TestScript.cs" id="1_7djwv"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
-[ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_6bhuw"]
+[ext_resource type="Texture2D" uid="uid://d3qg1huqeb2as" path="res://Sprites/turt.png" id="3_g4lm4"]
 [ext_resource type="PackedScene" uid="uid://dn76wxxbnk6ec" path="res://Scenes/BasicEnemy.tscn" id="4_igbv2"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd3wx"]
-size = Vector2(126, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkgq4"]
+radius = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxfbq"]
+radius = 21.9317
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7djwv")
@@ -15,11 +18,20 @@ script = ExtResource("1_7djwv")
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_4vjy7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_rd3wx")
-
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("3_6bhuw")
+z_index = 1
+rotation = 1.57079
+scale = Vector2(0.130511, 0.130511)
+texture = ExtResource("3_g4lm4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_rkgq4")
+
+[node name="WeakPoint" type="CollisionShape2D" parent="Player"]
+position = Vector2(-59, 0)
+rotation = -1.55818
+shape = SubResource("CircleShape2D_xxfbq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_l373k")
