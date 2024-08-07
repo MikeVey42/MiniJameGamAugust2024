@@ -13,7 +13,7 @@ public partial class SwordEnemy : Enemy
 		swordSlashPrefab = GD.Load<PackedScene>("res://Scenes/Projectiles/AreaSwordSlash.tscn");
 
 		desiredDistanceFromPlayer = 0;
-		speed = 200;
+		speed = 250;
 		maxHealth = 3;
 		timeBetweenAttacks = 1;
 

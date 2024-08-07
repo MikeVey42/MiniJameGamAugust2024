@@ -11,6 +11,12 @@ public partial class BowEnemy : Enemy
 	{
 		// Load the arrow prefab
 		arrowPrefab = GD.Load<PackedScene>("res://Scenes/Projectiles/Arrow.tscn");
+
+		desiredDistanceFromPlayer = 400;
+		speed = 150;
+		maxHealth = 2;
+		timeBetweenAttacks = 2;
+
 		
 		base._Ready();
 	}

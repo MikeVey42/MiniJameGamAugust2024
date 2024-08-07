@@ -21,6 +21,9 @@ public partial class DamageableEntity : CharacterBody2D
 
     // Subtracts the appropriate amount of health from the entity, cuasing it to die if it's health reaches 0
     public void Damage(int amount) {
+        if (health <= 0) {
+            return;
+        }
         health -= amount;
         // Broadcast that this entity has died
         if (health <= 0) {

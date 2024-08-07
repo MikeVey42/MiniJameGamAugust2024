@@ -10,4 +10,6 @@ public partial class Powerup : Resource
 	}
 
 	public virtual void OnGain() {}
+
+	public virtual void Periodic() {}
 }

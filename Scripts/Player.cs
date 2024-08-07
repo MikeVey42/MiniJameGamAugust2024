@@ -8,9 +8,9 @@ public partial class Player : DamageableEntity
 {
 
     [Export]
-    private float moveSpeed = 400;  // move speed in pixels/sec
+    public float moveSpeed = 400;  // move speed in pixels/sec
     [Export]
-    private float turnSpeed = 0.01f;
+    public float turnSpeed = 0.01f;
 
     private PackedScene chompPrefab;
 
@@ -36,6 +36,9 @@ public partial class Player : DamageableEntity
 
     public override void _PhysicsProcess(double delta)
     {
+        // Run each powerup
+        foreach (Powerup powerup in powerups) {powerup.Periodic();}
+
         // Move the player linearly according to inputs
         float yVelocity = Input.GetAxis("up", "down");
         float xVelocity = Input.GetAxis("left", "right");
@@ -74,7 +77,6 @@ public partial class Player : DamageableEntity
     public void ApplyPowerup(Powerup powerup) {
         powerup.Connect(this);
         powerup.OnGain();
-        powerups.Append(powerup);
-
+        powerups.Add(powerup);
     }
 }

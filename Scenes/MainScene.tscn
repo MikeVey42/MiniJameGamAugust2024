@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=10 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
+[ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_fc4fg"]
 [ext_resource type="Texture2D" uid="uid://d3qg1huqeb2as" path="res://Sprites/turt.png" id="3_g4lm4"]
+[ext_resource type="Script" path="res://Scripts/PowerupTracker.cs" id="3_yxwfx"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
-[ext_resource type="PackedScene" uid="uid://2g4t6vr8e4wr" path="res://Scenes/PowerupContainer.tscn" id="5_6aod3"]
+[ext_resource type="Script" path="res://Scripts/PowerupSpawner.cs" id="5_aow1t"]
 [ext_resource type="Script" path="res://Scripts/EnemyManager.cs" id="5_rbpb7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkgq4"]
@@ -54,11 +56,19 @@ position = Vector2(-59, 0)
 rotation = -1.55818
 shape = SubResource("CircleShape2D_xxfbq")
 
+[node name="PowerupTracker" type="Sprite2D" parent="Player"]
+scale = Vector2(0.140625, 0.140625)
+texture = ExtResource("3_fc4fg")
+script = ExtResource("3_yxwfx")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_l373k")
 
 [node name="Enemy Manager" type="Node2D" parent="."]
 script = ExtResource("5_rbpb7")
+
+[node name="Powerup Spawner" type="Node" parent="."]
+script = ExtResource("5_aow1t")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -67,6 +77,3 @@ offset_left = 21.0
 offset_right = 25.0
 offset_bottom = 27.0
 value = 100.0
-
-[node name="PowerupContainer" parent="." instance=ExtResource("5_6aod3")]
-position = Vector2(-492, 496)
