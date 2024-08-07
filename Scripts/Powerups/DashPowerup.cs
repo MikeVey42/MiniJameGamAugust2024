@@ -7,6 +7,10 @@ public partial class DashPowerup : Powerup
     Timer dashTimer, coolDownTimer;
     bool dashing, onCooldown;
 
+    public override string GetHint() {
+        return "Press space to dash";
+    }
+
     public override void OnGain()
     {
         dashTimer = new Timer{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=11 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_fc4fg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
 [ext_resource type="Script" path="res://Scripts/PowerupSpawner.cs" id="5_aow1t"]
 [ext_resource type="Script" path="res://Scripts/EnemyManager.cs" id="5_rbpb7"]
+[ext_resource type="Script" path="res://Scripts/UI/PowerupPopup.cs" id="8_7dt3r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkgq4"]
 radius = 29.2746
@@ -16,10 +17,11 @@ radius = 21.9317
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("powerupPopup")]
 collision_mask = 16
 script = ExtResource("2_4vjy7")
 turnSpeed = 0.05
+powerupPopup = NodePath("../UI/RichTextLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 z_index = 1
@@ -77,3 +79,17 @@ offset_left = 21.0
 offset_right = 25.0
 offset_bottom = 27.0
 value = 100.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -515.0
+offset_top = -40.0
+offset_right = 515.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+script = ExtResource("8_7dt3r")

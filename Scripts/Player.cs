@@ -20,6 +20,8 @@ public partial class Player : DamageableEntity
 
     Array<Powerup> powerups;
 
+    [Export] PowerupPopup powerupPopup;
+
     public override void _Ready()
     {
         maxHealth = 5;
@@ -78,5 +80,6 @@ public partial class Player : DamageableEntity
         powerup.Connect(this);
         powerup.OnGain();
         powerups.Add(powerup);
+        powerupPopup.ShowHint(powerup.GetHint());
     }
 }
