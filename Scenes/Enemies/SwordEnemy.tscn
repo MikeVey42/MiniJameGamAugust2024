@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn76wxxbnk6ec"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/SwordEnemy.cs" id="1_tgqip"]
+[ext_resource type="Texture2D" uid="uid://ctkryoovwrpup" path="res://Sprites/Enemies/Basic Enemy/neutral.png" id="2_4orm7"]
+[ext_resource type="Texture2D" uid="uid://cocxa4mex5v35" path="res://Sprites/Enemies/Basic Enemy/step left.png" id="3_r2s6i"]
+[ext_resource type="Texture2D" uid="uid://b2xts67x1k7i1" path="res://Sprites/Enemies/Basic Enemy/step right.png" id="4_nxyg2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eahlv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4orm7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r2s6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4orm7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nxyg2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c141r"]
+radius = 17.0
+height = 58.0
+
+[node name="SwordEnemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 19
+script = ExtResource("1_tgqip")
+hitFlashColor = Color(1, 0, 0, 1)
+baseColor = Color(1, 1, 1, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.146199, 0.146199)
+sprite_frames = SubResource("SpriteFrames_eahlv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_c141r")

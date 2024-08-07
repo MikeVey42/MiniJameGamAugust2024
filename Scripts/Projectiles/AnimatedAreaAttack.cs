@@ -3,7 +3,7 @@ using System;
 
 public partial class AnimatedAreaAttack : Area2D
 {
-	[Export] protected int damageAmount {get; set;}
+	[Export] public int damageAmount {get; set;}
 
 	private AnimatedSprite2D animation;
 	// Called when the node enters the scene tree for the first time.

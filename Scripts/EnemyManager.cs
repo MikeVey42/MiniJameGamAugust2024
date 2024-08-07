@@ -6,7 +6,7 @@ public partial class EnemyManager : Node2D
 	private Player player;
 	private Timer spawnTimer;
 
-	private PackedScene basicEnemyPrefab;
+	private PackedScene swordEnemyPrefab, bowEnemyPrefab;
 
 	private float spawnDistance = 1500;
 	// Called when the node enters the scene tree for the first time.
@@ -16,7 +16,9 @@ public partial class EnemyManager : Node2D
 		player = GetParent().GetNode<Player>("Player");
 
 		// Load the enemy prefabs
-		basicEnemyPrefab = LoadEnemy("BasicEnemy");
+		swordEnemyPrefab = LoadEnemy("SwordEnemy");
+		bowEnemyPrefab = LoadEnemy("BowEnemy");
+		
 
 		// Start the spawn timer
 		spawnTimer = new Timer() {
@@ -25,15 +27,16 @@ public partial class EnemyManager : Node2D
 			WaitTime = 3
 		};
 		AddChild(spawnTimer);
-		spawnTimer.Timeout += SpawnEnemy;
+		spawnTimer.Timeout += () => SpawnEnemy(swordEnemyPrefab);
+		spawnTimer.Timeout += () => SpawnEnemy(bowEnemyPrefab);
 
-		SpawnEnemy();
+		SpawnEnemy(swordEnemyPrefab);
 	}
 
-	public void SpawnEnemy() {
+	public void SpawnEnemy(PackedScene prefab) {
 		float angle = (float) GD.RandRange(0, Math.PI * 2);
 		Vector2 spawnPoint = player.Position + Vector2.FromAngle(angle) * spawnDistance;
-		Node2D enemy = (Node2D) basicEnemyPrefab.Instantiate();
+		Node2D enemy = (Node2D) prefab.Instantiate();
 		enemy.Position = spawnPoint;
 		AddChild(enemy);
 	}

@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvv2qu2l87nuk"]
 
-[ext_resource type="Script" path="res://Scripts/AreaSwordSlash.cs" id="1_eyxco"]
-[ext_resource type="Texture2D" uid="uid://bdw0t4lc6al4h" path="res://Sprites/sword.png" id="2_jumos"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/AreaSwordSlash.cs" id="1_8huwd"]
+[ext_resource type="Texture2D" uid="uid://bdw0t4lc6al4h" path="res://Sprites/sword.png" id="2_t1jck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjag"]
 size = Vector2(65.6875, 13)
 
 [node name="AreaSwordSlash" type="Area2D"]
 collision_layer = 4
-script = ExtResource("1_eyxco")
+script = ExtResource("1_8huwd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
 position = Vector2(27, -4.76837e-07)
 rotation = 1.5708
 scale = Vector2(0.155594, 0.155594)
-texture = ExtResource("2_jumos")
+texture = ExtResource("2_t1jck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(34.1563, 0)

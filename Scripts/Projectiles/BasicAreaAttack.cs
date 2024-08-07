@@ -3,7 +3,7 @@ using System;
 
 public partial class BasicAreaAttack : Area2D
 {
-	[Export] protected int damageAmount {get; set;}
+	[Export] public int damageAmount {get; set;}
 	[Export] protected float lifespan {get; set;}
 
 	private Timer lifeTimer;

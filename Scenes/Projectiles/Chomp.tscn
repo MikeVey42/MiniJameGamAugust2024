@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cflot7nl7b68o"]
 
-[ext_resource type="Script" path="res://Scripts/AnimatedAreaAttack.cs" id="1_iunbi"]
-[ext_resource type="Texture2D" uid="uid://b2ltywysl8p7d" path="res://Sprites/ChompAnimation/chomp1.png" id="2_8eumd"]
-[ext_resource type="Texture2D" uid="uid://5aigqy5o5uu2" path="res://Sprites/ChompAnimation/chomp2.png" id="3_043m2"]
-[ext_resource type="Texture2D" uid="uid://btriode1l2b1a" path="res://Sprites/ChompAnimation/chomp3.png" id="4_jae5r"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/AnimatedAreaAttack.cs" id="1_rww5f"]
+[ext_resource type="Texture2D" uid="uid://b2ltywysl8p7d" path="res://Sprites/ChompAnimation/chomp1.png" id="2_twbeq"]
+[ext_resource type="Texture2D" uid="uid://5aigqy5o5uu2" path="res://Sprites/ChompAnimation/chomp2.png" id="3_438yr"]
+[ext_resource type="Texture2D" uid="uid://btriode1l2b1a" path="res://Sprites/ChompAnimation/chomp3.png" id="4_pc244"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh4wv"]
 size = Vector2(94, 41)
@@ -12,16 +12,16 @@ size = Vector2(94, 41)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_8eumd")
+"texture": ExtResource("2_twbeq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_8eumd")
+"texture": ExtResource("2_twbeq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_043m2")
+"texture": ExtResource("3_438yr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_jae5r")
+"texture": ExtResource("4_pc244")
 }],
 "loop": true,
 "name": &"default",
@@ -31,8 +31,8 @@ animations = [{
 [node name="Chomp" type="Area2D"]
 position = Vector2(0, -1)
 collision_layer = 8
-collision_mask = 2
-script = ExtResource("1_iunbi")
+collision_mask = 18
+script = ExtResource("1_rww5f")
 damageAmount = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
