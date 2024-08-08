@@ -6,7 +6,7 @@ public abstract partial class Enemy : DamageableEntity
 {
 	protected Player player;
 
-	private Timer attackTimer;
+	protected Timer attackTimer;
 	// Timer for how long enemies should turn red when hit
 	private Timer hitFlashTImer;
 
@@ -68,6 +68,10 @@ public abstract partial class Enemy : DamageableEntity
         }else {
             Velocity = new Vector2(0, 0);
         }
+
+		if (directionToPlayer.Length() > 1500) {
+			Velocity *= 3;
+		}
 
 		MoveAndSlide();
     }

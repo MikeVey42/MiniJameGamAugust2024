@@ -22,9 +22,11 @@ public partial class Player : DamageableEntity
 
     [Export] PowerupPopup powerupPopup;
 
+    public int glassShards = 0;
+
     public override void _Ready()
     {
-        maxHealth = 5;
+        maxHealth = 500;
         base._Ready();
         OnDeath += DeathMessage;
 
@@ -34,6 +36,8 @@ public partial class Player : DamageableEntity
         OnDamage += () => healthBar.Value = (float) health * 100 / maxHealth;
 
         powerups = new Array<Powerup>();
+
+        glassShards = 0;
     }
 
     public override void _PhysicsProcess(double delta)

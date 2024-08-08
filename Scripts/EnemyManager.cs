@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class EnemyManager : Node2D
 {
@@ -9,6 +10,8 @@ public partial class EnemyManager : Node2D
 	private PackedScene swordEnemyPrefab, bowEnemyPrefab;
 
 	private float spawnDistance = 1500;
+
+	bool endgame;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -31,6 +34,8 @@ public partial class EnemyManager : Node2D
 		spawnTimer.Timeout += () => SpawnEnemy(bowEnemyPrefab);
 
 		SpawnEnemy(swordEnemyPrefab);
+
+		endgame = false;
 	}
 
 	public void SpawnEnemy(PackedScene prefab) {
@@ -38,10 +43,32 @@ public partial class EnemyManager : Node2D
 		Vector2 spawnPoint = player.Position + Vector2.FromAngle(angle) * spawnDistance;
 		Node2D enemy = (Node2D) prefab.Instantiate();
 		enemy.Position = spawnPoint;
-		AddChild(enemy);
+		CallDeferred(Node.MethodName.AddChild, enemy);
 	}
 
 	public PackedScene LoadEnemy(String name) {
 		return GD.Load<PackedScene>("res://Scenes/Enemies/"+ name + ".tscn");
 	}
+
+	public void Swarm() {
+		for (int i = 0; i < 30; i++) {
+			SpawnEnemy(swordEnemyPrefab);
+			SpawnEnemy(bowEnemyPrefab);
+		}
+		spawnTimer.Stop();
+
+		endgame = true;
+	}
+
+    public override void _Process(double delta)
+    {
+        if (!endgame) {
+			return;
+		}
+
+		Debug.Print(GetChildCount() +"");
+		if (GetChildCount() == 1) {
+			GetTree().ChangeSceneToFile("res://Scenes/WinScreen.tscn");
+		}
+    }
 }

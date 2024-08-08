@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddblcpd33lkai"]
+
+[ext_resource type="Script" path="res://Scripts/GlassShard.cs" id="1_bdo7i"]
+[ext_resource type="Texture2D" uid="uid://dtilymjtxgtnq" path="res://Sprites/circle.png" id="1_trpqh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wic20"]
+
+[node name="GlassShard" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_bdo7i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wic20")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0375, 0.0375)
+texture = ExtResource("1_trpqh")
