@@ -21,7 +21,7 @@ public partial class DashPowerup : Powerup
         dashTimer = new Timer{
             OneShot = true,
             Autostart = false,
-            WaitTime = 1.5
+            WaitTime = 0.75
         };
         coolDownTimer = new Timer{
             OneShot = true,
@@ -54,14 +54,14 @@ public partial class DashPowerup : Powerup
 
     public void StartDash() {
         dashing = true;
-        player.moveSpeed *= 3;
-        player.turnSpeed *= 3;
+        player.moveSpeed *= 3.5f;
+        player.turnSpeed *= 3.5f;
         dashTimer.Start();
     }
     public void EndDash() {
         dashing = false;
-        player.moveSpeed /= 3;
-        player.turnSpeed /= 3;
+        player.moveSpeed /= 3.5f;
+        player.turnSpeed /= 3.5f;
         onCooldown = true;
         coolDownTimer.Start();
         player.dashSound.Stop();

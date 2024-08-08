@@ -182,7 +182,7 @@ public partial class Player : DamageableEntity
     // Make the player bite
     private void Bite() {
         AnimatedAreaAttack chomp = (AnimatedAreaAttack) chompPrefab.Instantiate();
-        chomp.Position = new Vector2(170, 0);
+        chomp.Position = new Vector2(155, 0);
         chomp.damageAmount = attackDamage;
         chomp.Scale *= attackSize;
         AddChild(chomp);

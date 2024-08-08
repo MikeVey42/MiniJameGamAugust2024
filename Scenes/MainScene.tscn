@@ -212,6 +212,7 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_rw1kp")
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("powerupPopup", "biteSound", "powerupGainedSound", "dashSound", "sprite")]
 y_sort_enabled = true
 collision_mask = 16
+motion_mode = 1
 script = ExtResource("2_4vjy7")
 turnSpeed = 0.05
 powerupPopup = NodePath("../UI/RichTextLabel")

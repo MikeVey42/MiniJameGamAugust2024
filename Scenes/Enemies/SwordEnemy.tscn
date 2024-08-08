@@ -47,6 +47,7 @@ height = 58.0
 [node name="SwordEnemy" type="CharacterBody2D" node_paths=PackedStringArray("swingSound", "hurtSound")]
 collision_layer = 2
 collision_mask = 19
+motion_mode = 1
 script = ExtResource("1_tgqip")
 swingSound = NodePath("SwingSound")
 hitFlashColor = Color(1, 0, 0, 1)

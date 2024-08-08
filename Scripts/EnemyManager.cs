@@ -27,7 +27,7 @@ public partial class EnemyManager : Node2D
 		spawnTimer = new Timer() {
 			OneShot = false,
 			Autostart = true,
-			WaitTime = 4
+			WaitTime = 5
 		};
 		AddChild(spawnTimer);
 		spawnTimer.Timeout += () => SpawnEnemy(swordEnemyPrefab);
