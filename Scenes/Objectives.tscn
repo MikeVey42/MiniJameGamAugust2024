@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmkq3754t1o1j"]
+
+[ext_resource type="Script" path="res://Scripts/WaitScreen.cs" id="1_emyvx"]
+
+[node name="Objectives" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_emyvx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "
+
+
+
+
+[center]Objective:
+You can only be hurt on your tail.
+Collect powerups to grow stronger. The arrow will guide you.
+Collect 10 glass shards and assemble them into the ultimate powerup to win."

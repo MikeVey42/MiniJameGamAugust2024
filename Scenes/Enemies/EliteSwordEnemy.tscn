@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://rsiqu0p7yi83"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/EliteSwordEnemy.cs" id="1_68ib5"]
+[ext_resource type="Texture2D" uid="uid://goej0f0vgaru" path="res://Sprites/KnightSpritesheet.png" id="2_vvgmk"]
+[ext_resource type="AudioStream" uid="uid://cem5di2me7yia" path="res://Audio/Sound Effects/enemyHit.wav" id="3_glgac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byrdw"]
+atlas = ExtResource("2_vvgmk")
+region = Rect2(0, 0, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o2ni"]
+atlas = ExtResource("2_vvgmk")
+region = Rect2(200, 0, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb4hj"]
+atlas = ExtResource("2_vvgmk")
+region = Rect2(0, 225, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhksj"]
+atlas = ExtResource("2_vvgmk")
+region = Rect2(200, 225, 200, 225)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eahlv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byrdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3o2ni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb4hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhksj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c141r"]
+radius = 17.0
+height = 58.0
+
+[node name="EliteSwordEnemy" type="CharacterBody2D"]
+modulate = Color(1, 1, 0.419608, 1)
+scale = Vector2(1.47059, 1.47059)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_68ib5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -3)
+scale = Vector2(0.54, 0.54)
+sprite_frames = SubResource("SpriteFrames_eahlv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_c141r")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_glgac")
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="."]

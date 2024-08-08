@@ -5,9 +5,9 @@ using System.Diagnostics;
 public partial class EnemyManager : Node2D
 {
 	private Player player;
-	private Timer spawnTimer;
+	private Timer spawnTimer, rampTimer;
 
-	private PackedScene swordEnemyPrefab, bowEnemyPrefab;
+	private PackedScene swordEnemyPrefab, bowEnemyPrefab, eliteSwordEnemyPrefab;
 
 	private float spawnDistance = 1500;
 
@@ -21,6 +21,7 @@ public partial class EnemyManager : Node2D
 		// Load the enemy prefabs
 		swordEnemyPrefab = LoadEnemy("SwordEnemy");
 		bowEnemyPrefab = LoadEnemy("BowEnemy");
+		eliteSwordEnemyPrefab = LoadEnemy("EliteSwordEnemy");
 		
 
 		// Start the spawn timer
@@ -29,9 +30,17 @@ public partial class EnemyManager : Node2D
 			Autostart = true,
 			WaitTime = 5
 		};
+		rampTimer = new Timer() {
+			OneShot = false,
+			Autostart = true,
+			WaitTime = 15
+		};
 		AddChild(spawnTimer);
+		AddChild(rampTimer);
 		spawnTimer.Timeout += () => SpawnEnemy(swordEnemyPrefab);
 		spawnTimer.Timeout += () => SpawnEnemy(bowEnemyPrefab);
+		spawnTimer.Timeout += () => SpawnEliteSword();
+		rampTimer.Timeout += () => spawnTimer.WaitTime -= 0.1;
 
 		SpawnEnemy(swordEnemyPrefab);
 
@@ -71,4 +80,8 @@ public partial class EnemyManager : Node2D
 			GetTree().ChangeSceneToFile("res://Scenes/WinScreen.tscn");
 		}
     }
+
+	private void SpawnEliteSword() {
+		if (GD.RandRange(0,4)==5) SpawnEnemy(eliteSwordEnemyPrefab);
+	}
 }

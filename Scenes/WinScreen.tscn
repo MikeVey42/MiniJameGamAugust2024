@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmkq3754t1o1j"]
+[gd_scene load_steps=5 format=3 uid="uid://bv110dvy3botq"]
 
 [ext_resource type="AudioStream" uid="uid://25pnujmhy3ls" path="res://Audio/Sound Effects/win.wav" id="1_j8qvk"]
 [ext_resource type="Texture2D" uid="uid://du0bn8a8vxhau" path="res://Sprites/you_won.png" id="1_p3hxj"]
