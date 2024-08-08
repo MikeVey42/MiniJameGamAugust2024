@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 public partial class Player : DamageableEntity
 {
@@ -16,7 +17,7 @@ public partial class Player : DamageableEntity
 
     private ProgressBar healthBar;
 
-    public int attackDamage = 1;
+    public int attackDamage = 6;
 
     Array<Powerup> powerups;
 
@@ -25,8 +26,13 @@ public partial class Player : DamageableEntity
     public int glassShards = 0;
 
     [Export] private AudioStreamPlayer2D biteSound;
-    [Export] private AudioStreamPlayer2D powerupGainedSound;
+    [Export] public AudioStreamPlayer2D powerupGainedSound;
     [Export] public AudioStreamPlayer2D dashSound;
+    // Animation
+    [Export] private AnimatedSprite2D sprite;
+
+    private Timer attackCooldownTimer;
+    private Timer attackDelayTimer;
 
     public override void _Ready()
     {
@@ -42,6 +48,23 @@ public partial class Player : DamageableEntity
         powerups = new Array<Powerup>();
 
         glassShards = 0;
+
+        attackCooldownTimer = new Timer {
+            OneShot = true,
+            Autostart = false,
+            WaitTime = 0.35
+        };
+
+        attackDelayTimer = new Timer {
+            OneShot = true,
+            Autostart = false,
+            WaitTime = 0.1
+        };
+
+        AddChild(attackCooldownTimer);
+        AddChild(attackDelayTimer);
+
+        attackDelayTimer.Timeout += Bite;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -52,18 +75,25 @@ public partial class Player : DamageableEntity
         // Move the player linearly according to inputs
         float yVelocity = Input.GetAxis("up", "down");
         float xVelocity = Input.GetAxis("left", "right");
-        Velocity = new Vector2(xVelocity, yVelocity) * moveSpeed;
+        // If the player is attacking, don't move
+        if (!IsAttacking()) {
+            Velocity = new Vector2(xVelocity, yVelocity) * moveSpeed;
+            WalkingAnimation();
+        }else if (attackDelayTimer.TimeLeft != 0) {
+            Velocity = Vector2.FromAngle(Rotation) * moveSpeed * 2;
+        } else {
+            Velocity = Vector2.Zero;
+        }
+
         MoveAndSlide();
 
         FaceTowardsPlayer(turnSpeed);
 
-        // Make the player attack
-        if (Input.IsActionJustPressed("click")) {
-            AnimatedAreaAttack chomp = (AnimatedAreaAttack) chompPrefab.Instantiate();
-            chomp.Position = new Vector2(120, 0);
-            chomp.damageAmount = attackDamage;
-            AddChild(chomp);
-            biteSound.Play();
+        // Make the player lunge and attack
+        if (Input.IsActionJustPressed("click") && !IsAttacking()) {
+            attackDelayTimer.Start();
+            // Play the bite animation
+            sprite.Play("bite");
         }
     }
 
@@ -72,16 +102,33 @@ public partial class Player : DamageableEntity
     }
 
     public void FaceTowardsPlayer(float speed) {
+        // If the player is attacking, don't move
+        if (IsAttacking()) {
+            return;
+        }
+
+        if (Velocity.Length() >= 1) {
+            speed /= 2;
+        }
         // Turn the player to face towards the mouse
         float desiredAngle = (GetGlobalMousePosition() - this.Position).Angle();
         float error = desiredAngle - Rotation;
         if (Math.Abs(error) < speed) {
             // If the player is almost facing the right way, snap them to it
             Rotation = desiredAngle;
+            if (Math.Abs(error) < 0.003 && Velocity.Length() < 1) {
+                sprite.Play("idle");
+            }
         }else if (error > 0 && error < Math.PI || error < -Math.PI) { // Check which direction to turn to
             Rotation += speed;
+            if (Velocity.Length() < 1) {
+                sprite.Play("turnRight");
+            }
         }else {
             Rotation -= speed;
+            if (Velocity.Length() < 1) {
+                sprite.Play("turnLeft");
+            }
         }
     }
 
@@ -91,5 +138,39 @@ public partial class Player : DamageableEntity
         powerups.Add(powerup);
         powerupPopup.ShowHint(powerup.GetHint());
         powerupGainedSound.Play();
+    }
+
+    // Handle the animation for walking linearly
+    public void WalkingAnimation() {
+        // If idle, we aren't moving, don't do anything
+        if (Velocity.Length() < 1) {
+            return;
+        }
+
+        float strafeAngle = (Velocity.Angle() * 180 / (float) Math.PI) - RotationDegrees;
+        bool forwards = (strafeAngle < 45 && strafeAngle > -45) || strafeAngle > 315 || strafeAngle < -315;
+        bool backwards = (strafeAngle > 135 && strafeAngle < 225) || (strafeAngle < -135 && strafeAngle > -225);
+        if (!backwards) {
+            sprite.Play("walk");
+        }else if (backwards) {
+            sprite.PlayBackwards("walk");
+        }else {
+            sprite.Play("idle");
+        }
+    }
+
+    private bool IsAttacking() {
+        return !(attackCooldownTimer.TimeLeft == 0 && attackDelayTimer.TimeLeft == 0);
+    }
+
+    // Make the player bite
+    private void Bite() {
+        AnimatedAreaAttack chomp = (AnimatedAreaAttack) chompPrefab.Instantiate();
+        chomp.Position = new Vector2(200, 0);
+        chomp.damageAmount = attackDamage;
+        AddChild(chomp);
+        biteSound.Play();
+
+        attackCooldownTimer.Start();
     }
 }

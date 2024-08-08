@@ -14,4 +14,9 @@ public abstract partial class Powerup : Resource
 	public virtual void Periodic() {}
 
 	public abstract string GetHint();
+	public abstract Texture2D GetIcon();
+
+	public static Texture2D LoadIcon(string name) {
+		return GD.Load<Texture2D>("res://Sprites/PowerupIcons/" + name + ".png");
+	}
 }

@@ -18,7 +18,7 @@ public partial class BowEnemy : Enemy
 
 		desiredDistanceFromPlayer = GD.RandRange(350, 450);
 		speed = 150;
-		maxHealth = 2;
+		maxHealth = 6;
 		timeBetweenAttacks = 2 + (float) GD.RandRange(-0.1, 0.1);
 
 		angleOffset = (float) GD.RandRange(-Math.PI / 3, Math.PI / 3);
@@ -29,7 +29,7 @@ public partial class BowEnemy : Enemy
 	public override void fire() {
 		if ((player.Position - this.Position).Length() < 600) {
 			BasicProjectile arrow = (BasicProjectile) arrowPrefab.Instantiate();
-			Vector2 tailPosition = player.Position - Vector2.FromAngle(player.Rotation) * 55;
+			Vector2 tailPosition = player.Position - Vector2.FromAngle(player.Rotation) * 140;
 			Vector2 directionToPlayer = (tailPosition - this.Position).Normalized();
 			arrow.Position = this.Position + directionToPlayer * 30;
 			arrow.Rotation = directionToPlayer.Angle();

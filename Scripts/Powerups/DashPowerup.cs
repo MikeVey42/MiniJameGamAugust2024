@@ -11,6 +11,11 @@ public partial class DashPowerup : Powerup
         return "Press space to dash";
     }
 
+    public override Texture2D GetIcon()
+    {
+        return LoadIcon("Wing");
+    }
+
     public override void OnGain()
     {
         dashTimer = new Timer{

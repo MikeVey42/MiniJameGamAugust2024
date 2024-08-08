@@ -16,9 +16,9 @@ hitTailSound = NodePath("HitTail")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(27, -4.76837e-07)
-rotation = 1.5708
-scale = Vector2(0.155594, 0.155594)
+position = Vector2(31, 1)
+rotation = 1.48667
+scale = Vector2(0.687382, 0.687382)
 texture = ExtResource("2_t1jck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

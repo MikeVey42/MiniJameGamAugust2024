@@ -12,7 +12,7 @@ public partial class PowerupContainer : DamageableEntity
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		maxHealth = 30;
+		maxHealth = 60;
 		base._Ready();
 
 		OnDeath += GrantPowerup;
@@ -20,10 +20,19 @@ public partial class PowerupContainer : DamageableEntity
 		player = GetParent().GetParent().GetNode<Player>("Player");
 
 		OnDamage += () => hitSound.Play();
+
+		GetNode<Sprite2D>("PowerupIcon").Texture = storedPowerup.GetIcon();
 	}
 
-	public void GrantPowerup() {
-		if (player.glassShards >= 1) {
+    public override void _Process(double delta)
+    {
+        if (player.glassShards >= 10) {
+			GetNode<Sprite2D>("PowerupIcon").Texture = Powerup.LoadIcon("Glasses");
+		}
+    }
+
+    public void GrantPowerup() {
+		if (player.glassShards >= 10) {
 			player.ApplyPowerup(new LaserPowerup());
 			GetParent().GetParent().GetNode<EnemyManager>("Enemy Manager").Swarm();
 			CallDeferred(Node.MethodName.QueueFree);

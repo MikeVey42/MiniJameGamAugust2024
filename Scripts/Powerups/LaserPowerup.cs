@@ -9,6 +9,11 @@ public partial class LaserPowerup : Powerup
     public override string GetHint() {
         return "The end is now. Kill everyone";
     }
+
+    public override Texture2D GetIcon()
+    {
+        return LoadIcon("Glasses");
+    }
     public override void OnGain() {
         player.attackDamage+=100;
         laserPrefab = GD.Load<PackedScene>("res://Scenes/Projectiles/Laser.tscn");

@@ -16,14 +16,14 @@ public partial class SwordEnemy : Enemy
 
 		desiredDistanceFromPlayer = 0;
 		speed = 250;
-		maxHealth = 3;
+		maxHealth = 12;
 		timeBetweenAttacks = 1;
 
 		base._Ready();
 	}
 
 	public override void fire() {
-		if ((player.Position - this.Position).Length() < 150) {
+		if ((player.Position - this.Position).Length() < 175) {
 			AreaSwordSlash swordSlash = (AreaSwordSlash) swordSlashPrefab.Instantiate();
 			Vector2 directionToPlayer = (player.Position - this.Position).Normalized();
 			swordSlash.Position = directionToPlayer * 15;

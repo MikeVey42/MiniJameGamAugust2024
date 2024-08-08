@@ -1,25 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn76wxxbnk6ec"]
+[gd_scene load_steps=10 format=3 uid="uid://dn76wxxbnk6ec"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/SwordEnemy.cs" id="1_tgqip"]
-[ext_resource type="Texture2D" uid="uid://ctkryoovwrpup" path="res://Sprites/Enemies/Basic Enemy/neutral.png" id="2_4orm7"]
-[ext_resource type="Texture2D" uid="uid://cocxa4mex5v35" path="res://Sprites/Enemies/Basic Enemy/step left.png" id="3_r2s6i"]
-[ext_resource type="Texture2D" uid="uid://b2xts67x1k7i1" path="res://Sprites/Enemies/Basic Enemy/step right.png" id="4_nxyg2"]
+[ext_resource type="Texture2D" uid="uid://goej0f0vgaru" path="res://Sprites/KnightSpritesheet.png" id="2_brflh"]
 [ext_resource type="AudioStream" uid="uid://cem5di2me7yia" path="res://Audio/Sound Effects/enemyHit.wav" id="5_4nict"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byrdw"]
+atlas = ExtResource("2_brflh")
+region = Rect2(0, 0, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o2ni"]
+atlas = ExtResource("2_brflh")
+region = Rect2(200, 0, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb4hj"]
+atlas = ExtResource("2_brflh")
+region = Rect2(0, 225, 200, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhksj"]
+atlas = ExtResource("2_brflh")
+region = Rect2(200, 225, 200, 225)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eahlv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4orm7")
+"texture": SubResource("AtlasTexture_byrdw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_r2s6i")
+"texture": SubResource("AtlasTexture_3o2ni")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_4orm7")
+"texture": SubResource("AtlasTexture_mb4hj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_nxyg2")
+"texture": SubResource("AtlasTexture_jhksj")
 }],
 "loop": true,
 "name": &"default",
@@ -40,7 +54,8 @@ baseColor = Color(1, 1, 1, 1)
 hurtSound = NodePath("HurtSound")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.146199, 0.146199)
+position = Vector2(3, -3)
+scale = Vector2(0.54, 0.54)
 sprite_frames = SubResource("SpriteFrames_eahlv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

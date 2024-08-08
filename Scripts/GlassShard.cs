@@ -11,7 +11,9 @@ public partial class GlassShard : Area2D
 
 	public void Collect(Node2D body) {
 		if (body is Player) {
-			((Player) body).glassShards++;
+			Player player = (Player) body;
+			player.glassShards++;
+			player.powerupGainedSound.Play();
 			QueueFree();
 		}
 	}

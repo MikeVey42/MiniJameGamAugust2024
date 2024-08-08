@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://btriode1l2b1a" path="res://Sprites/ChompAnimation/chomp3.png" id="4_pc244"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh4wv"]
-size = Vector2(94, 41)
+size = Vector2(54, 101)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_erdfg"]
 animations = [{
@@ -33,14 +33,14 @@ position = Vector2(0, -1)
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("1_rww5f")
-damageAmount = 1
+damageAmount = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0.5)
+position = Vector2(-11, 0.5)
 shape = SubResource("RectangleShape2D_dh4wv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, -1)
+position = Vector2(-13.9316, -1.00002)
 rotation = 1.5708
-scale = Vector2(0.18856, 0.207056)
+scale = Vector2(0.253538, 0.148559)
 sprite_frames = SubResource("SpriteFrames_erdfg")
