@@ -1,8 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=40 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://3l682kyeut1x" path="res://Sprites/TurtleSpritesheet.png" id="2_mun67"]
-[ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_fc4fg"]
+[ext_resource type="Texture2D" uid="uid://cudn6i5nw1cx7" path="res://Sprites/point_arrow.png" id="3_4qj8q"]
 [ext_resource type="Script" path="res://Scripts/PowerupTracker.cs" id="3_yxwfx"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
 [ext_resource type="AudioStream" uid="uid://bncosnlkkiu1p" path="res://Audio/Sound Effects/bite.wav" id="5_3mhk6"]
@@ -196,9 +196,16 @@ height = 288.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xxfbq"]
 radius = 27.1662
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw1kp"]
+bg_color = Color(0.569222, 0.168242, 0, 1)
+
+[sub_resource type="Theme" id="Theme_28n3u"]
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_rw1kp")
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("powerupPopup", "biteSound", "powerupGainedSound", "dashSound", "sprite")]
+y_sort_enabled = true
 collision_mask = 16
 script = ExtResource("2_4vjy7")
 turnSpeed = 0.05
@@ -213,7 +220,7 @@ rotation = 1.57079
 scale = Vector2(0.392341, 0.392341)
 sprite_frames = SubResource("SpriteFrames_fnwab")
 animation = &"bite"
-frame_progress = 0.00639053
+frame_progress = 0.9589
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" groups=["invincible"]]
 position = Vector2(17, -3)
@@ -226,8 +233,9 @@ rotation = -1.55818
 shape = SubResource("CircleShape2D_xxfbq")
 
 [node name="PowerupTracker" type="Sprite2D" parent="Player"]
+z_index = 10
 scale = Vector2(0.140625, 0.140625)
-texture = ExtResource("3_fc4fg")
+texture = ExtResource("3_4qj8q")
 script = ExtResource("3_yxwfx")
 
 [node name="BiteSound" type="AudioStreamPlayer2D" parent="Player"]
@@ -260,10 +268,18 @@ script = ExtResource("5_aow1t")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="ProgressBar" parent="UI"]
-offset_left = 21.0
-offset_right = 25.0
-offset_bottom = 27.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -454.0
+offset_top = 8.0
+offset_right = 454.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme = SubResource("Theme_28n3u")
 value = 100.0
+rounded = true
+show_percentage = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchors_preset = 7
@@ -282,7 +298,3 @@ script = ExtResource("8_7dt3r")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_1pcib")
 autoplay = true
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-25, 350)
-texture = ExtResource("3_fc4fg")

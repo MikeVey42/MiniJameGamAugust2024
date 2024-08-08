@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c68c3q0aar876"]
+
+[ext_resource type="Script" path="res://Scripts/Terrain.cs" id="1_x71ke"]
+[ext_resource type="Texture2D" uid="uid://bj6gt4krjrik0" path="res://Sprites/Terrain.png" id="2_26cob"]
+
+[node name="Terrain" type="Node2D"]
+script = ExtResource("1_x71ke")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+y_sort_enabled = true
+scale = Vector2(0.392563, 0.392563)
+texture = ExtResource("2_26cob")
+hframes = 3
+vframes = 3
+frame = 4

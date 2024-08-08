@@ -23,6 +23,7 @@ public partial class PowerupTracker : Sprite2D
 
 		Vector2 directionToPowerup = powerupContainer.Position - player.Position;
 		Position = Vector2.FromAngle(directionToPowerup.Angle() - player.Rotation) * 100;
+		Rotation = directionToPowerup.Angle() - player.Rotation;
 	}
 
 	public void Track(PowerupContainer target) {

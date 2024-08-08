@@ -29,6 +29,7 @@ volume_db = -14.054
 stream = ExtResource("3_lbgoc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-228, 0)
 rotation = 1.57079
 scale = Vector2(1.58785, 1.19056)

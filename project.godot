@@ -70,4 +70,4 @@ dash={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.411689, 0.352322, 0.1252, 1)
+environment/defaults/default_clear_color=Color(0.299501, 0.513816, 0.206373, 1)

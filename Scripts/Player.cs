@@ -36,7 +36,7 @@ public partial class Player : DamageableEntity
 
     public override void _Ready()
     {
-        maxHealth = 5;
+        maxHealth = 10;
         base._Ready();
         OnDeath += DeathMessage;
 

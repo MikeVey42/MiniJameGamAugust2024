@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class PowerupSpawner : Node
 {
-	PackedScene powerupContainerPrefab, glassShardPrefab;
+	PackedScene powerupContainerPrefab, glassShardPrefab, terrainPrefab;
 	Player player;
 
 	Timer glassShardSpawnTimer;
@@ -24,25 +24,27 @@ public partial class PowerupSpawner : Node
 	{
 		powerupContainerPrefab = GD.Load<PackedScene>("res://Scenes/PowerupContainer.tscn");
 		glassShardPrefab = GD.Load<PackedScene>("res://Scenes/GlassShard.tscn");
+		terrainPrefab = GD.Load<PackedScene>("res://Scenes/Terrain.tscn");
 		player = GetParent().GetNode<Player>("Player");
 		SpawnPowerupContainer();
 
 		glassShardSpawnTimer = new Timer {
 			OneShot = false,
 			Autostart = true,
-			WaitTime = 0.5
+			WaitTime = 3
 		};
 		AddChild(glassShardSpawnTimer);
 		glassShardSpawnTimer.Timeout += SpawnGlassShard;
+		SpawnTerrain();
 	}
 
 	public void SpawnPowerupContainer() {
 		// Generate a random angle
 		float angle = (float) GD.RandRange(0, Math.PI * 2);
 		// Generate a random distance
-		float distance = (float) GD.RandRange(3000f, 5000f);
+		float distance = (float) GD.RandRange(2000f, 7000f);
 		// Use the above two variables to choose a spawn position around the player
-		Vector2 spawnPoint = player.Position + Vector2.FromAngle(angle) * distance;
+		Vector2 spawnPoint = Vector2.FromAngle(angle) * distance;
 
 		PowerupContainer powerupContainer = powerupContainerPrefab.Instantiate<PowerupContainer>();
 		powerupContainer.Position = spawnPoint;
@@ -69,14 +71,24 @@ public partial class PowerupSpawner : Node
 		// Generate a random angle
 		float angle = (float) GD.RandRange(0, Math.PI * 2);
 		// Generate a random distance
-		float distance = (float) GD.RandRange(2000, 4000);
+		float distance = (float) GD.RandRange(2000, 7000);
 		// Use the above two variables to choose a spawn position around the player
-		Vector2 spawnPoint = player.Position + Vector2.FromAngle(angle) * distance;
+		Vector2 spawnPoint = Vector2.FromAngle(angle) * distance;
 
 		// Spawn a glass shard
 		GlassShard glassShard = glassShardPrefab.Instantiate<GlassShard>();
 		glassShard.Position = spawnPoint;
 		CallDeferred(Node.MethodName.AddChild, glassShard);
 
+	}
+
+	public void SpawnTerrain() {
+		for (int i = 0; i < 300; i++) {
+			float x = (float) GD.RandRange(-7000f, 7000f);
+			float y = (float) GD.RandRange(-7000f, 7000f);
+			Node2D terrain = terrainPrefab.Instantiate<Node2D>();
+			terrain.Position = new Vector2(x, y);
+			CallDeferred(Node.MethodName.AddChild, terrain);
+		}
 	}
 }
