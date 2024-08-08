@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1g3dtky3xmqa"]
+[gd_scene load_steps=9 format=3 uid="uid://d1g3dtky3xmqa"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/BowEnemy.cs" id="1_t2g3r"]
 [ext_resource type="Texture2D" uid="uid://ctkryoovwrpup" path="res://Sprites/Enemies/Basic Enemy/neutral.png" id="2_uwqm3"]
 [ext_resource type="Texture2D" uid="uid://cocxa4mex5v35" path="res://Sprites/Enemies/Basic Enemy/step left.png" id="3_qi1vp"]
 [ext_resource type="Texture2D" uid="uid://b2xts67x1k7i1" path="res://Sprites/Enemies/Basic Enemy/step right.png" id="4_gadn4"]
+[ext_resource type="AudioStream" uid="uid://cem5di2me7yia" path="res://Audio/Sound Effects/enemyHit.wav" id="5_3gma5"]
+[ext_resource type="AudioStream" uid="uid://cyscs48avw4qp" path="res://Audio/Sound Effects/enemyBow.wav" id="5_qqu8g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eahlv"]
 animations = [{
@@ -29,15 +31,17 @@ animations = [{
 radius = 17.0
 height = 58.0
 
-[node name="BowEnemy" type="CharacterBody2D"]
+[node name="BowEnemy" type="CharacterBody2D" node_paths=PackedStringArray("fireSound", "hurtSound")]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_t2g3r")
+fireSound = NodePath("FireSound")
 hitFlashColor = Color(1, 0, 0, 1)
 timeBetweenAttacks = 2.0
 desiredDistanceFromPlayer = 400.0
 baseColor = Color(8.90419e-07, 0.587142, 1.15514e-06, 1)
 speed = 150.0
+hurtSound = NodePath("HurtSound")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.146199, 0.146199)
@@ -46,3 +50,9 @@ sprite_frames = SubResource("SpriteFrames_eahlv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_c141r")
+
+[node name="FireSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qqu8g")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3gma5")

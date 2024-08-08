@@ -24,9 +24,13 @@ public partial class Player : DamageableEntity
 
     public int glassShards = 0;
 
+    [Export] private AudioStreamPlayer2D biteSound;
+    [Export] private AudioStreamPlayer2D powerupGainedSound;
+    [Export] public AudioStreamPlayer2D dashSound;
+
     public override void _Ready()
     {
-        maxHealth = 500;
+        maxHealth = 5;
         base._Ready();
         OnDeath += DeathMessage;
 
@@ -59,11 +63,12 @@ public partial class Player : DamageableEntity
             chomp.Position = new Vector2(120, 0);
             chomp.damageAmount = attackDamage;
             AddChild(chomp);
+            biteSound.Play();
         }
     }
 
     public void DeathMessage() {
-        GetTree().ChangeSceneToFile("res://Scenes/DeathScreen.tscn");
+        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "res://Scenes/DeathScreen.tscn");
     }
 
     public void FaceTowardsPlayer(float speed) {
@@ -85,5 +90,6 @@ public partial class Player : DamageableEntity
         powerup.OnGain();
         powerups.Add(powerup);
         powerupPopup.ShowHint(powerup.GetHint());
+        powerupGainedSound.Play();
     }
 }

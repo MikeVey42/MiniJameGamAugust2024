@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class BasicAreaAttack : Area2D
 {
 	[Export] public int damageAmount {get; set;}
 	[Export] protected float lifespan {get; set;}
+
+	[Export] AudioStreamPlayer2D hitShellSound;
+	[Export] AudioStreamPlayer2D hitTailSound;
 
 	private Timer lifeTimer;
 	// Called when the node enters the scene tree for the first time.
@@ -19,7 +23,7 @@ public partial class BasicAreaAttack : Area2D
 		};
 		AddChild(lifeTimer);
 		lifeTimer.Start(lifespan);
-		lifeTimer.Timeout += () => QueueFree();
+		lifeTimer.Timeout += Despawn;
 	}
 
     private void hit(Rid bodyRid, Node2D body, long bodyShapeIndex, long localShapeIndex)
@@ -34,11 +38,25 @@ public partial class BasicAreaAttack : Area2D
 		}
 
 		if (shapeHit.IsInGroup("invincible")) {
+			if (!hitShellSound.Playing) hitShellSound.Play();
 			return;
 		}
 
 		DamageableEntity target = (DamageableEntity) physicsBody;
 
 		target.Damage(damageAmount);
+		if (!hitTailSound.Playing) hitTailSound.Play();
     }
+
+	private void Despawn() {
+		SetPhysicsProcess(false);
+		Visible = false;
+		if (hitShellSound.Playing) {
+			hitShellSound.Finished += () => QueueFree();
+		} else if (hitTailSound.Playing) {
+			hitTailSound.Finished += () => QueueFree();
+		} else {
+			QueueFree();
+		}
+	}
 }

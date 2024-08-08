@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://2g4t6vr8e4wr"]
+[gd_scene load_steps=5 format=3 uid="uid://2g4t6vr8e4wr"]
 
 [ext_resource type="Texture2D" uid="uid://dtilymjtxgtnq" path="res://Sprites/circle.png" id="1_lyqt3"]
 [ext_resource type="Script" path="res://Scripts/PowerupContainer.cs" id="1_o7bye"]
+[ext_resource type="AudioStream" uid="uid://ckkgmpmrwy6hs" path="res://Audio/Sound Effects/powerupContainerHit.wav" id="3_aycob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgvcu"]
 radius = 115.017
 
-[node name="PowerupContainer" type="CharacterBody2D"]
+[node name="PowerupContainer" type="CharacterBody2D" node_paths=PackedStringArray("hitSound")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_o7bye")
+hitSound = NodePath("HitSound")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vgvcu")
@@ -17,3 +19,6 @@ shape = SubResource("CircleShape2D_vgvcu")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.41875, 0.41875)
 texture = ExtResource("1_lyqt3")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aycob")

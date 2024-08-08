@@ -19,6 +19,8 @@ public abstract partial class Enemy : DamageableEntity
     [Export] protected Color baseColor;
     [Export] protected float speed = 200;
 
+	[Export] AudioStreamPlayer2D hurtSound;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -55,6 +57,9 @@ public abstract partial class Enemy : DamageableEntity
 		OnDamage += hitFlashOn;
 
         Modulate = baseColor;
+
+		// Make being damaged play the hurt sound
+		OnDamage += () => hurtSound.Play();
 	}
 
     public override void _PhysicsProcess(double delta)

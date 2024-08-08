@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://i8h405kvkiev"]
+[gd_scene load_steps=2 format=3 uid="uid://i8h405kvkiev"]
+
+[ext_resource type="AudioStream" uid="uid://2ycmorla7wgc" path="res://Audio/Sound Effects/loss.wav" id="1_dnx1d"]
 
 [node name="Death Screen" type="Control"]
 layout_mode = 3
@@ -26,3 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "[center]You died...[/center]"
+
+[node name="LossSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_dnx1d")
+autoplay = true

@@ -6,6 +6,8 @@ public partial class SwordEnemy : Enemy
 {
 	PackedScene swordSlashPrefab;
 
+	[Export] AudioStreamPlayer2D swingSound;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -27,6 +29,7 @@ public partial class SwordEnemy : Enemy
 			swordSlash.Position = directionToPlayer * 15;
 			swordSlash.Rotation = directionToPlayer.Angle();
 			AddChild(swordSlash);
+			swingSound.Play();
 		}
 	}
 }

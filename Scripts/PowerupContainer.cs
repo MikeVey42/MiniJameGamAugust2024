@@ -6,6 +6,8 @@ public partial class PowerupContainer : DamageableEntity
 	[Export] public Powerup storedPowerup;
 
 	Player player;
+
+	[Export] AudioStreamPlayer2D hitSound;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,6 +18,8 @@ public partial class PowerupContainer : DamageableEntity
 		OnDeath += GrantPowerup;
 
 		player = GetParent().GetParent().GetNode<Player>("Player");
+
+		OnDamage += () => hitSound.Play();
 	}
 
 	public void GrantPowerup() {

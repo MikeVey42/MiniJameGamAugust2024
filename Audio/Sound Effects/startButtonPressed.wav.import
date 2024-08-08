@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dnwv0axt3w55e"
+path="res://.godot/imported/startButtonPressed.wav-c3e2196220759911e3396c0ea1e3307b.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/startButtonPressed.wav"
+dest_files=["res://.godot/imported/startButtonPressed.wav-c3e2196220759911e3396c0ea1e3307b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

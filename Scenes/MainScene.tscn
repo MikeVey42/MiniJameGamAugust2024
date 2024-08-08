@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=15 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://bgwvtfro2b5qh" path="res://Sprites/icon.svg" id="3_fc4fg"]
 [ext_resource type="Texture2D" uid="uid://d3qg1huqeb2as" path="res://Sprites/turt.png" id="3_g4lm4"]
 [ext_resource type="Script" path="res://Scripts/PowerupTracker.cs" id="3_yxwfx"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="4_l373k"]
+[ext_resource type="AudioStream" uid="uid://bncosnlkkiu1p" path="res://Audio/Sound Effects/bite.wav" id="5_3mhk6"]
 [ext_resource type="Script" path="res://Scripts/PowerupSpawner.cs" id="5_aow1t"]
 [ext_resource type="Script" path="res://Scripts/EnemyManager.cs" id="5_rbpb7"]
+[ext_resource type="AudioStream" uid="uid://b7c2shxk5jjv8" path="res://Audio/Sound Effects/powerGained.wav" id="6_r3mpt"]
+[ext_resource type="AudioStream" uid="uid://drh5rdr8elg6f" path="res://Audio/Sound Effects/sprint.wav" id="7_05j34"]
 [ext_resource type="Script" path="res://Scripts/UI/PowerupPopup.cs" id="8_7dt3r"]
+[ext_resource type="AudioStream" uid="uid://dnwv0axt3w55e" path="res://Audio/Sound Effects/startButtonPressed.wav" id="12_1pcib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkgq4"]
 radius = 29.2746
@@ -17,11 +21,14 @@ radius = 21.9317
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("powerupPopup")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("powerupPopup", "biteSound", "powerupGainedSound", "dashSound")]
 collision_mask = 16
 script = ExtResource("2_4vjy7")
 turnSpeed = 0.05
 powerupPopup = NodePath("../UI/RichTextLabel")
+biteSound = NodePath("BiteSound")
+powerupGainedSound = NodePath("PowerupGainedSound")
+dashSound = NodePath("SprintSound")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 z_index = 1
@@ -63,6 +70,17 @@ scale = Vector2(0.140625, 0.140625)
 texture = ExtResource("3_fc4fg")
 script = ExtResource("3_yxwfx")
 
+[node name="BiteSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("5_3mhk6")
+
+[node name="PowerupGainedSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_r3mpt")
+
+[node name="SprintSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("7_05j34")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_l373k")
 
@@ -93,3 +111,7 @@ grow_horizontal = 2
 grow_vertical = 0
 bbcode_enabled = true
 script = ExtResource("8_7dt3r")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_1pcib")
+autoplay = true

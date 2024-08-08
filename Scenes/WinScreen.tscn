@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://bmkq3754t1o1j"]
+[gd_scene load_steps=2 format=3 uid="uid://bmkq3754t1o1j"]
 
-[node name="Death Screen" type="Control"]
+[ext_resource type="AudioStream" uid="uid://25pnujmhy3ls" path="res://Audio/Sound Effects/win.wav" id="1_j8qvk"]
+
+[node name="Win Screen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,3 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "[center]You won![/center]"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_j8qvk")
+autoplay = true

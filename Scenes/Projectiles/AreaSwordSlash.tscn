@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvv2qu2l87nuk"]
+[gd_scene load_steps=6 format=3 uid="uid://bvv2qu2l87nuk"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/AreaSwordSlash.cs" id="1_8huwd"]
 [ext_resource type="Texture2D" uid="uid://bdw0t4lc6al4h" path="res://Sprites/sword.png" id="2_t1jck"]
+[ext_resource type="AudioStream" uid="uid://52q6w6bp5vpc" path="res://Audio/Sound Effects/playerShellHit.wav" id="3_e4iyl"]
+[ext_resource type="AudioStream" uid="uid://fhc02vh65in2" path="res://Audio/Sound Effects/playerTailHit.wav" id="4_imyeg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjag"]
 size = Vector2(65.6875, 13)
 
-[node name="AreaSwordSlash" type="Area2D"]
+[node name="AreaSwordSlash" type="Area2D" node_paths=PackedStringArray("hitShellSound", "hitTailSound")]
 collision_layer = 4
 script = ExtResource("1_8huwd")
+hitShellSound = NodePath("HitShell")
+hitTailSound = NodePath("HitTail")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
@@ -20,3 +24,10 @@ texture = ExtResource("2_t1jck")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(34.1563, 0)
 shape = SubResource("RectangleShape2D_0wjag")
+
+[node name="HitShell" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_e4iyl")
+volume_db = -14.054
+
+[node name="HitTail" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_imyeg")

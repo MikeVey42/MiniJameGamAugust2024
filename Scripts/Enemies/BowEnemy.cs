@@ -8,6 +8,8 @@ public partial class BowEnemy : Enemy
 	// Desired angle the enemy wants to attack the tail from
 	float angleOffset;
 
+	[Export] AudioStreamPlayer2D fireSound;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -32,6 +34,7 @@ public partial class BowEnemy : Enemy
 			arrow.Position = this.Position + directionToPlayer * 30;
 			arrow.Rotation = directionToPlayer.Angle();
 			GetParent().GetParent().AddChild(arrow);
+			fireSound.Play();
 		}
 	}
 

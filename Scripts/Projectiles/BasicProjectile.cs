@@ -7,6 +7,9 @@ public partial class BasicProjectile : CharacterBody2D
 	protected int damageAmount {get; set;}
 	[Export]
 	protected  float speed {get; set;}
+
+	[Export] AudioStreamPlayer2D hitShellSound;
+	[Export] AudioStreamPlayer2D hitTailSound;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -34,14 +37,20 @@ public partial class BasicProjectile : CharacterBody2D
 
 		// If the hitbox is invincible (like a shield or a turtle shell), destroy this projectile
 		if (hitBox.IsInGroup("invincible")) {
-			QueueFree();
+			hitShellSound.Play();
+			SetPhysicsProcess(false);
+			Visible = false;
+			hitShellSound.Finished += () => QueueFree();
 			return;
 		}
 
 		// Otherwise, damage the target that was hit then delete this object
 		DamageableEntity target = (DamageableEntity) collisionInfo.GetCollider();
 		target.Damage(damageAmount);
-		QueueFree();
+		hitTailSound.Play();
+		SetPhysicsProcess(false);
+		Visible = false;
+		hitTailSound.Finished += () => QueueFree();
 		
     }
 }
