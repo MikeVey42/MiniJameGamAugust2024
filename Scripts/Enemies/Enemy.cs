@@ -20,6 +20,7 @@ public abstract partial class Enemy : DamageableEntity
     [Export] protected float speed = 200;
 
 	[Export] AudioStreamPlayer2D hurtSound;
+	[Export] Color deathExplosionColor;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -39,7 +40,7 @@ public abstract partial class Enemy : DamageableEntity
 		// Set the health
 		base._Ready();
 		// Delete this object when it dies
-		OnDeath += () => QueueFree();
+		OnDeath += showDeathExplosion;
 
 		// Start the walking animation
 		AnimatedSprite2D animation = (AnimatedSprite2D) GetChild(0);
@@ -90,5 +91,14 @@ public abstract partial class Enemy : DamageableEntity
 
 	public void hitFlashOff() {
 		Modulate = baseColor;
+	}
+
+	// Spawn a tinted explosion particle, and then destroy this object
+	public void showDeathExplosion() {
+		ExplosionParticle particles = GD.Load<PackedScene>("res://Scenes/ExplosionParticle.tscn").Instantiate<ExplosionParticle>();
+		particles.Modulate = deathExplosionColor;
+		particles.Position = Position;
+		GetParent().GetParent().AddChild(particles);
+		QueueFree();
 	}
 }

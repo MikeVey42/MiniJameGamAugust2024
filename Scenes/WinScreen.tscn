@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmkq3754t1o1j"]
+[gd_scene load_steps=3 format=3 uid="uid://bmkq3754t1o1j"]
 
 [ext_resource type="AudioStream" uid="uid://25pnujmhy3ls" path="res://Audio/Sound Effects/win.wav" id="1_j8qvk"]
+[ext_resource type="Texture2D" uid="uid://du0bn8a8vxhau" path="res://Sprites/you_won.png" id="1_p3hxj"]
 
 [node name="Win Screen" type="Control"]
 layout_mode = 3
@@ -20,14 +21,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-bbcode_enabled = true
-text = "[center]You won![/center]"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CenterContainer"]
+scale = Vector2(1.47428, 1.47428)
+texture = ExtResource("1_p3hxj")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_j8qvk")

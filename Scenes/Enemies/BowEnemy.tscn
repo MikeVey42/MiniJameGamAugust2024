@@ -38,7 +38,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c141r"]
@@ -57,12 +57,15 @@ desiredDistanceFromPlayer = 400.0
 baseColor = Color(1, 1, 1, 1)
 speed = 150.0
 hurtSound = NodePath("HurtSound")
+deathExplosionColor = Color(0.387421, 0.201456, 9.62615e-08, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.68, 0.68)
 sprite_frames = SubResource("SpriteFrames_eahlv")
+frame_progress = 0.765316
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_c141r")

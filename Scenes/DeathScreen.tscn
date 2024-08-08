@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://i8h405kvkiev"]
+[gd_scene load_steps=3 format=3 uid="uid://i8h405kvkiev"]
 
 [ext_resource type="AudioStream" uid="uid://2ycmorla7wgc" path="res://Audio/Sound Effects/loss.wav" id="1_dnx1d"]
+[ext_resource type="Texture2D" uid="uid://cjmf1k2esk2x0" path="res://Sprites/you_died.png" id="1_j3sua"]
 
 [node name="Death Screen" type="Control"]
 layout_mode = 3
@@ -20,14 +21,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-bbcode_enabled = true
-text = "[center]You died...[/center]"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CenterContainer"]
+scale = Vector2(1.47428, 1.47428)
+texture = ExtResource("1_j3sua")
 
 [node name="LossSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_dnx1d")
