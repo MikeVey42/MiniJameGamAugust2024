@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bb3esvbnpwsvf"]
 
-[ext_resource type="Script" path="res://Scripts/Projectiles/BasicAreaAttack.cs" id="1_u60pl"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/Laser.cs" id="1_v6uow"]
 [ext_resource type="AudioStream" uid="uid://chwsxqns70p7u" path="res://Audio/Sound Effects/laserFiring.wav" id="2_hqw0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyodb"]
@@ -9,11 +9,11 @@ size = Vector2(2623, 20)
 [node name="Area2D" type="Area2D" node_paths=PackedStringArray("hitShellSound", "hitTailSound")]
 collision_layer = 8
 collision_mask = 2
-script = ExtResource("1_u60pl")
+script = ExtResource("1_v6uow")
 damageAmount = 100
 lifespan = 1000.0
-hitShellSound = NodePath("NoSound")
-hitTailSound = NodePath("VaporizeSound")
+hitShellSound = NodePath("VaporizeSound")
+hitTailSound = NodePath("NoSound")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1313.5, 0)

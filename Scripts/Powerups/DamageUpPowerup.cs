@@ -15,5 +15,8 @@ public partial class DamageUpPowerup : Powerup
 
     public override void OnGain() {
         player.attackDamage+=6;
+        if (player.attackDamage > 12) {
+            player.attackSize += 0.5f;
+        }
     }
 }

@@ -38,14 +38,20 @@ public partial class BasicAreaAttack : Area2D
 		}
 
 		if (shapeHit.IsInGroup("invincible")) {
-			if (!hitShellSound.Playing) hitShellSound.Play();
+			if (!hitShellSound.Playing) {
+				hitShellSound.PitchScale = (float) GD.RandRange(0.9, 1.1);
+				hitShellSound.Play();
+			}
 			return;
 		}
 
 		DamageableEntity target = (DamageableEntity) physicsBody;
 
 		target.Damage(damageAmount);
-		if (!hitTailSound.Playing) hitTailSound.Play();
+		if (!hitTailSound.Playing) {
+			hitTailSound.PitchScale = (float) GD.RandRange(0.9, 1.1);
+			hitTailSound.Play();	
+		} 
     }
 
 	private void Despawn() {

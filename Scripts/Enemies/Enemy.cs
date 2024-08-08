@@ -80,6 +80,7 @@ public abstract partial class Enemy : DamageableEntity
 		}
 
 		MoveAndSlide();
+		
     }
 
 	public abstract void fire();

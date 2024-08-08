@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://i8h405kvkiev"]
+[gd_scene load_steps=5 format=3 uid="uid://i8h405kvkiev"]
 
 [ext_resource type="AudioStream" uid="uid://2ycmorla7wgc" path="res://Audio/Sound Effects/loss.wav" id="1_dnx1d"]
 [ext_resource type="Texture2D" uid="uid://cjmf1k2esk2x0" path="res://Sprites/you_died.png" id="1_j3sua"]
+[ext_resource type="Texture2D" uid="uid://c4ff24nrwsl8w" path="res://Sprites/play_again.png" id="2_1ux3c"]
+[ext_resource type="Script" path="res://Scripts/StartButton.cs" id="3_i03ff"]
 
 [node name="Death Screen" type="Control"]
 layout_mode = 3
@@ -31,8 +33,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CenterContainer"]
+position = Vector2(0, -83)
 scale = Vector2(1.47428, 1.47428)
 texture = ExtResource("1_j3sua")
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 53.0
+offset_right = 150.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/CenterContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("2_1ux3c")
+script = ExtResource("3_i03ff")
 
 [node name="LossSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_dnx1d")

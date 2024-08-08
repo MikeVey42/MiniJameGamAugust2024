@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlsguhhk2b761"]
+[gd_scene load_steps=10 format=3 uid="uid://dlsguhhk2b761"]
 
 [ext_resource type="Script" path="res://Scripts/ExplosionParticle.cs" id="1_if34m"]
 [ext_resource type="Texture2D" uid="uid://ccpsqjeh6qmd1" path="res://Sprites/splosion_sprites.png" id="2_cf4rv"]
+[ext_resource type="AudioStream" uid="uid://b082nxch8fctr" path="res://Audio/Sound Effects/enemyDeath.wav" id="3_jvcl0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jop3h"]
 atlas = ExtResource("2_cf4rv")
@@ -52,4 +53,8 @@ script = ExtResource("1_if34m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.634763, 0.634763)
 sprite_frames = SubResource("SpriteFrames_ok0ky")
-frame_progress = 0.0230843
+frame_progress = 0.485091
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jvcl0")
+autoplay = true

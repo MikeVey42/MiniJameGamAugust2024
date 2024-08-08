@@ -18,6 +18,7 @@ public partial class Player : DamageableEntity
     private ProgressBar healthBar;
 
     public int attackDamage = 6;
+    public float attackSize = 1;
 
     Array<Powerup> powerups;
 
@@ -33,6 +34,8 @@ public partial class Player : DamageableEntity
 
     private Timer attackCooldownTimer;
     private Timer attackDelayTimer;
+
+    bool laserEnabled;
 
     public override void _Ready()
     {
@@ -65,6 +68,8 @@ public partial class Player : DamageableEntity
         AddChild(attackDelayTimer);
 
         attackDelayTimer.Timeout += Bite;
+
+        laserEnabled = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -90,7 +95,7 @@ public partial class Player : DamageableEntity
         FaceTowardsPlayer(turnSpeed);
 
         // Make the player lunge and attack
-        if (Input.IsActionJustPressed("click") && !IsAttacking()) {
+        if (Input.IsActionJustPressed("click") && !IsAttacking() && !laserEnabled) {
             attackDelayTimer.Start();
             // Play the bite animation
             sprite.Play("bite");
@@ -107,9 +112,16 @@ public partial class Player : DamageableEntity
             return;
         }
 
+        // If the player is moving, turn slower
         if (Velocity.Length() >= 1) {
             speed /= 2;
         }
+
+        // If the player has the laser, turn faster
+        if (laserEnabled) {
+            speed *= 1.5f;
+        }
+
         // Turn the player to face towards the mouse
         float desiredAngle = (GetGlobalMousePosition() - this.Position).Angle();
         float error = desiredAngle - Rotation;
@@ -133,6 +145,10 @@ public partial class Player : DamageableEntity
     }
 
     public void ApplyPowerup(Powerup powerup) {
+        if (powerup is LaserPowerup) {
+            laserEnabled = true;
+        }
+
         powerup.Connect(this);
         powerup.OnGain();
         powerups.Add(powerup);
@@ -166,9 +182,11 @@ public partial class Player : DamageableEntity
     // Make the player bite
     private void Bite() {
         AnimatedAreaAttack chomp = (AnimatedAreaAttack) chompPrefab.Instantiate();
-        chomp.Position = new Vector2(200, 0);
+        chomp.Position = new Vector2(170, 0);
         chomp.damageAmount = attackDamage;
+        chomp.Scale *= attackSize;
         AddChild(chomp);
+        biteSound.PitchScale = (float) GD.RandRange(0.9, 1.1);
         biteSound.Play();
 
         attackCooldownTimer.Start();

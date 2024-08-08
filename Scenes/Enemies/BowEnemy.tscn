@@ -48,7 +48,7 @@ height = 58.0
 [node name="BowEnemy" type="CharacterBody2D" node_paths=PackedStringArray("fireSound", "hurtSound")]
 y_sort_enabled = true
 collision_layer = 2
-collision_mask = 17
+collision_mask = 19
 script = ExtResource("1_t2g3r")
 fireSound = NodePath("FireSound")
 hitFlashColor = Color(1, 0, 0, 1)
@@ -62,7 +62,7 @@ deathExplosionColor = Color(0.387421, 0.201456, 9.62615e-08, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.68, 0.68)
 sprite_frames = SubResource("SpriteFrames_eahlv")
-frame_progress = 0.155865
+frame_progress = 0.659784
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

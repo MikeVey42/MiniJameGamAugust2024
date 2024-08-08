@@ -34,6 +34,7 @@ public partial class BowEnemy : Enemy
 			arrow.Position = this.Position + directionToPlayer * 30;
 			arrow.Rotation = directionToPlayer.Angle();
 			GetParent().GetParent().AddChild(arrow);
+			fireSound.PitchScale = (float) GD.RandRange(0.9, 1.1);
 			fireSound.Play();
 		}
 	}

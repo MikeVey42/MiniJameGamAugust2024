@@ -11,6 +11,7 @@ size = Vector2(65.6875, 13)
 [node name="AreaSwordSlash" type="Area2D" node_paths=PackedStringArray("hitShellSound", "hitTailSound")]
 collision_layer = 4
 script = ExtResource("1_8huwd")
+damageAmount = 2
 hitShellSound = NodePath("HitShell")
 hitTailSound = NodePath("HitTail")
 
