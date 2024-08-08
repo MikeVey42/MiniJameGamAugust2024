@@ -62,7 +62,7 @@ deathExplosionColor = Color(0.387421, 0.201456, 9.62615e-08, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.68, 0.68)
 sprite_frames = SubResource("SpriteFrames_eahlv")
-frame_progress = 0.765316
+frame_progress = 0.155865
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

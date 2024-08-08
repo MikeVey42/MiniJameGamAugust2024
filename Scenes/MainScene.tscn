@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b7jfy3hptr7xc"]
+[gd_scene load_steps=42 format=3 uid="uid://b7jfy3hptr7xc"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_4vjy7"]
 [ext_resource type="Texture2D" uid="uid://3l682kyeut1x" path="res://Sprites/TurtleSpritesheet.png" id="2_mun67"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b8txrscibddjk" path="res://Sprites/TurtleCrystal.png" id="8_3jgb3"]
 [ext_resource type="Script" path="res://Scripts/UI/PowerupPopup.cs" id="8_7dt3r"]
 [ext_resource type="AudioStream" uid="uid://dnwv0axt3w55e" path="res://Audio/Sound Effects/startButtonPressed.wav" id="12_1pcib"]
+[ext_resource type="Texture2D" uid="uid://f37av5omkn2a" path="res://Sprites/hp_bar.png" id="12_c85b4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xksqn"]
 atlas = ExtResource("2_mun67")
@@ -196,10 +197,14 @@ height = 288.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xxfbq"]
 radius = 27.1662
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xm1gb"]
+bg_color = Color(0.127514, 0.0163534, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw1kp"]
 bg_color = Color(0.569222, 0.168242, 0, 1)
 
 [sub_resource type="Theme" id="Theme_28n3u"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_xm1gb")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_rw1kp")
 
 [node name="Node2D" type="Node2D"]
@@ -272,14 +277,19 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -454.0
-offset_top = 8.0
+offset_top = 13.0
 offset_right = 446.0
-offset_bottom = 38.0
+offset_bottom = 43.0
 grow_horizontal = 2
 theme = SubResource("Theme_28n3u")
 value = 100.0
 rounded = true
 show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/HealthBar"]
+position = Vector2(451, 16)
+scale = Vector2(0.979152, 0.587812)
+texture = ExtResource("12_c85b4")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchors_preset = 7

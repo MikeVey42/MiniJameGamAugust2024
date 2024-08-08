@@ -12,7 +12,7 @@ size = Vector2(82, 20)
 collision_layer = 4
 script = ExtResource("1_exlxl")
 damageAmount = 2
-speed = 30.0
+speed = 35.0
 hitShellSound = NodePath("HitShell")
 hitTailSound = NodePath("HitTail")
 
